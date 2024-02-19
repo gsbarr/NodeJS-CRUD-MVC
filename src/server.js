@@ -13,9 +13,7 @@ app.use(express.urlencoded({extended: false})); // Convierte automaticamente cua
 //Variables globales
 
 // Rutas
-app.get('/', (req, res) => {
-    res.send('HOLA');
-});
+app.use(require('./routes/MotosRutas.js'));
 
 // Archivos estáticos
 app.use(express.static(__dirname +  '\public')); // Configuramos cuál es la carpeta PUBLIC

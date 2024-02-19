@@ -15,4 +15,4 @@ const MotosSchema = new Schema({
 });
 
 // Modelo creado a partir del esquema
-module.exports = model('Motos', MotosSchema);
+module.exports = model('Motos', MotosSchema, 'Motos');
