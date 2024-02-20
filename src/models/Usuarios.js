@@ -26,7 +26,7 @@ UsuarioEsquema.methods.encriptarPass = async password => {
 }
 
 // Función para verificar si la contraseña es correcta
-UsuarioEsquema.methods.matchPassword = function (password) {
+UsuarioEsquema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
