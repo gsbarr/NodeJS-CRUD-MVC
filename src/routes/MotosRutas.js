@@ -4,35 +4,14 @@ const router = Router ();
 const MotosController = require('../controllers/MotosController.js');
 
 
-router.post('/motos/nuevo', async (req, res) => {
-    // Para obtener un dato en particular
-    const { nombre, marca } = req.body;
-    console.log(req.body);
-
-    // Si existen los 4 datos
-    if ( nombre && marca) {
-        // Creamos un nuevo item
-        const nuevaMoto = new Motos({nombre, marca});
-        console.log(nuevaMoto);
-
-        // Guardamos el nuevo item 
-        await nuevaMoto.save();
-
-        //Generamos un nuevo ID
-        const id = ProdData.length + 1;
-        
-        
-        res.send('Recurso creado');
-    }
-    else {
-        res.status(500).json({error: 'Error en creación del recurso: '});
-    }
-
-    
-});
+router.post('/motos/nuevo', MotosController.nuevoItem);
 
 router.get('/motos/listar', MotosController.listarTodo);
 
 router.delete('/motos/eliminar/:id', MotosController.eliminarItem);
+
+router.put('/motos/actualizar/:id', MotosController.actualizar);
+
+router.get('/motos/listar/:id', MotosController.encontrar);
 
 module.exports = router;   
