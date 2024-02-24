@@ -19,17 +19,25 @@ MotosController.nuevoItem = async (req, res) => {
         const nuevaMoto = new Motos({nombre, marca});
         console.log(nuevaMoto);
 
-        // Guardamos el nuevo item 
-        await nuevaMoto.save();
 
-        //Generamos un nuevo ID
-        //const id = ProdData.length + 1;
+        try {
+            // Guardamos el nuevo item 
+            let r = await nuevaMoto.save();
+
+            // Verificamos si se creó el recurso
+            if (r){
+                res.status(200).json({msg: 'Recurso creado'});
+            } else {
+                res.status(500).json({error: 'Recurso no creado'});
+            }
+        } catch (e) {
+            console.log(e);
+            res.status(500).json({error: e});
+        }
         
-        
-        res.send('Recurso creado');
     }
     else {
-        res.status(500).json({error: 'Error en creación del recurso: '});
+        res.status(500).json({error: 'faltan datos'});
     }
 
     
@@ -45,8 +53,9 @@ MotosController.encontrar = async (req, res) => {
     console.log(req.params.id);
     if (req.params.id) {
         const Moto = await Motos.findById(req.params.id);
+       
         if (Moto){
-            res.send(Moto);
+            res.send(Moto); 
         } else{
             res.send("Elemento no encontrado");
         }
@@ -64,7 +73,15 @@ MotosController.eliminarItem = async (req, res) => {
 
     if (id){
         console.log(id);
-        await Motos.findByIdAndDelete(id);
+        
+        try{
+            await Motos.findByIdAndDelete(id);
+        }
+        catch (err) { 
+            console.log("Error en el delete: "+error);
+            res.status(500).json({error: err});
+        }
+
         res.send("ID ELIMINADO");
     } else{
         res.send("Falta ID");
@@ -79,10 +96,19 @@ MotosController.actualizar = async (req, res) => {
 
     if (id && nombre && marca){
         console.log(id, nombre, marca);
-        await Motos.findByIdAndUpdate(id, {nombre, marca});
-        res.send("ID actualizado");
+        
+        try{
+            let r = await Motos.findByIdAndUpdate(id, {nombre, marca});
+            if (r){
+                res.status(200).json({msg: 'Recurso actualizado'})
+            } else{
+                res.status(500).json({error: 'Recurso no encontrado'});
+            }
+        } catch(e){
+            res.status(500).json({error: e});
+        }
     } else{
-        res.send("Faltan datos");
+        res.status(500).json({error: 'faltan datos'});
     }
 };
 
