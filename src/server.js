@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 // Inicializaciones
 const app = express();
@@ -9,6 +10,7 @@ app.set('views', __dirname + '../views');
 
 // Middleware
 app.use(express.urlencoded({extended: false})); // Convierte automaticamente cualquier dato que recibe en un JSON
+app.use(cors());
 
 
 //Variables globales
