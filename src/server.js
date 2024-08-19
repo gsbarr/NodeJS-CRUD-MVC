@@ -17,6 +17,7 @@ app.use(cors());
 
 // Rutas
 app.use(require('./routes/MotosRutas.js'));
+//app.use(require('./routes/UsuariosRutas.js'));
 
 // Archivos estáticos
 app.use(express.static(__dirname +  '\public')); // Configuramos cuál es la carpeta PUBLIC
