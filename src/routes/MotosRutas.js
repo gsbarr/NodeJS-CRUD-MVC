@@ -14,4 +14,5 @@ router.put('/motos/actualizar/:id', MotosController.actualizar);
 
 router.get('/motos/listar/:id', MotosController.encontrar);
 
+
 module.exports = router;   
