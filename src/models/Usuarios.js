@@ -16,7 +16,7 @@ const UsuarioEsquema = new Schema({
     }
 
 }, {
-    timestamps: true
+    timestamps: true 
 });
 
 // Creamos función que encripta contraseña

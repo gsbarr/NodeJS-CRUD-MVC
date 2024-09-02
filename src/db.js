@@ -9,3 +9,4 @@ const MONGODB_URI = `mongodb+srv://${process.env.BD_USUARIO}:${process.env.BD_PA
 mongoose.connect(MONGODB_URI)
 .then (db => console.log('BD conectada'))
 .catch(err => console.log(err));
+ 
