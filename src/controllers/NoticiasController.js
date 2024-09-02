@@ -4,19 +4,16 @@ const Noticias = require('../models/Noticias.js');
 // Creamos un nuevo controlador
 const NoticiasController = {};
 
-NoticiasController.inicio = (req, res) => {
-    res.send('sadsa');
-};
 
 NoticiasController.nuevoItem = async (req, res) => {
     // Para obtener un dato en particular
-    const { nombre, marca } = req.body;
+    const { autor, titulo, texto } = req.body;
     console.log(req.body);
 
     // Si existen los 4 datos
-    if ( nombre && marca) {
+    if ( autor && titulo && texto ) {
         // Creamos un nuevo item
-        const nuevaNoticia = new Noticias({nombre, marca});
+        const nuevaNoticia = new Noticias({autor, titulo, texto});
         console.log(nuevaNoticia);
 
 
