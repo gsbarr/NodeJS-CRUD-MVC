@@ -1,19 +1,15 @@
 const {Schema, model} = require('mongoose');
 
 const NoticiasEsquema = new Schema({
-    Noticias: {
+    autor: {
         type: String,
         required: true
     },
-    subtitulo: {
+    titulo: {
         type: String,
         required: true
     },
     texto: {
-        type: String,
-        required: true
-    },
-    fechahora: {
         type: String,
         required: true
     }

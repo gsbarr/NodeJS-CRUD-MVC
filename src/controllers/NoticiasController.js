@@ -45,22 +45,56 @@ NoticiasController.listarTodo= async (req, res) => {
     res.send(listado);
 };
 
-NoticiasController.encontrar = async (req, res) => {
+NoticiasController.encontrarPorID = async (req, res) => {
     //const { nombre } = req.params.id;
     console.log(req.params.id);
+    
     if (req.params.id) {
-        const Noticia = await Noticias.findById(req.params.id);
-       
-        if (Noticia){
-            res.send(Noticia); 
-        } else{
-            res.send("Elemento no encontrado");
+
+        try{
+            const Noticia = await Noticias.findById(req.params.id);
+
+            console.log("encontro elemento");
+            if (Noticia){
+                res.send(Noticia); 
+            } else{
+                res.send("Elemento no encontrado");
+            }
         }
+        catch(err){
+            console.log("No se encontró elemento");
+            res.status(404).json({msg: 'No se encontró elemento'});
+
+        }
+       
     }
-    else {
-        res.send("error");
+  
+    
+};
+
+NoticiasController.encontrarPorTitulo = async (req, res) => {
+    //const { nombre } = req.params.id;
+    console.log(req.params.id);
+
+    if (req.params.id) {
+
+        try{
+            const Noticia = await Noticias.find({ titulo: req.params.id }).exec();
+
+            if (Noticia){
+                res.send(Noticia); 
+            } else{
+                res.send("Elemento no encontrado");
+            }
+
+        } 
+        catch (err) { 
+            console.log("No se encontró elemento");
+            res.status(404).json({msg: 'No se encontró elemento'});
+
+        }
+
     }
-        
   
     
 };
@@ -75,7 +109,7 @@ NoticiasController.eliminarItem = async (req, res) => {
             await Noticias.findByIdAndDelete(id);
         }
         catch (err) { 
-            console.log("Error en el delete: "+error);
+            console.log("Error en el delete: "+err);
             res.status(500).json({error: err});
         }
 

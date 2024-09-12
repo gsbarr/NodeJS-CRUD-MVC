@@ -11,8 +11,8 @@ app.set('views', __dirname + '../views');
 // Middleware
 app.use(express.urlencoded({extended: false})); // Convierte automaticamente cualquier dato que recibe en un JSON
 app.use(cors());
-
-
+ 
+ 
 //Variables globales
 
 // Rutas
