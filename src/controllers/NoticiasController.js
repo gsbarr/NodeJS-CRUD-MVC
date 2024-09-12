@@ -58,7 +58,7 @@ NoticiasController.encontrarPorID = async (req, res) => {
             if (Noticia){
                 res.send(Noticia); 
             } else{
-                res.send("Elemento no encontrado");
+                res.status(404).json({msg: 'No se encontró elemento'});
             }
         }
         catch(err){
@@ -84,7 +84,7 @@ NoticiasController.encontrarPorTitulo = async (req, res) => {
             if (Noticia){
                 res.send(Noticia); 
             } else{
-                res.send("Elemento no encontrado");
+                res.status(404).json({msg: 'No se encontró elemento'});
             }
 
         } 
@@ -121,19 +121,18 @@ NoticiasController.eliminarItem = async (req, res) => {
 
 NoticiasController.actualizar = async (req, res) => {
     const id = req.params.id;
-    const { nombre, marca } = req.body;
+    const { autor, titulo, texto } = req.body;
 
     console.log(req.body);
 
-    if (id && nombre && marca){
-        console.log(id, nombre, marca);
+    if (id && autor && titulo && texto){
         
         try{
-            let r = await Noticias.findByIdAndUpdate(id, {nombre, marca});
+            let r = await Noticias.findByIdAndUpdate(id, {autor, titulo, texto});
             if (r){
                 res.status(200).json({msg: 'Recurso actualizado'})
             } else{
-                res.status(500).json({error: 'Recurso no encontrado'});
+                res.status(404).json({error: 'Recurso no encontrado'});
             }
         } catch(e){
             res.status(500).json({error: e});
