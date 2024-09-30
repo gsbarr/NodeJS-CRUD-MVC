@@ -30,4 +30,4 @@ UsuarioEsquema.methods.matchPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-module.exports = model('Usuarios', UsuarioEsquema);
+module.exports = model('Usuarios', UsuarioEsquema, 'Usuarios');
