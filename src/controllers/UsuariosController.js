@@ -7,6 +7,13 @@ const Usuarios = require('../models/Usuarios.js');
 // Creamos un nuevo controlador
 const UsuariosController = {};
 
+UsuariosController.pruebaAut = async (req, res) => {
+    
+    console.log('Pasaste la prueba de la autenticación');
+    res.status(200).send('Pasaste la prueba de la autenticación');
+    
+};
+
 UsuariosController.nuevoItem = async (req, res) => {
     // Para obtener un dato en particular
     const { nombre, marca } = req.body;
