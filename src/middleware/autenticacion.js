@@ -6,6 +6,7 @@ const Autenticacion = {};
 
 Autenticacion.verificarToken = async (req, res, next) => {
     // Extract the token from the Authorization header
+    console.log("verificando");
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     const secretKey = process.env.JWT_SECRET;
