@@ -6,24 +6,28 @@ const Autenticacion = {};
 
 Autenticacion.verificarToken = async (req, res, next) => {
     // Extract the token from the Authorization header
-    console.log("verificando");
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    console.log("verificando token");
+
+    const cookieJWT = req.headers.cookie.split("; ").find(cookie => cookie.startsWith("jwt=")).slice(4);
+    console.log(cookieJWT);
+
     const secretKey = process.env.JWT_SECRET;
-  
-    if (!token) {
+
+    if (!cookieJWT) {
+      console.log("No se entregó token");
       return res.status(401).json({ message: 'No token provided' });
     }
   
     // Verify and decode the token
-    jwt.verify(token, secretKey, (err, decoded) => {
+    jwt.verify(cookieJWT, secretKey, (err, decoded) => {
       if (err) {
-        console.log('fallaste la prueba jeje');
+        console.log('Token invalido');
         return res.status(403).json({ message: 'Invalid token' });
       }
   
       // Add the decoded user information to the request object
       req.user = decoded;
+      console.log("NEXT");
       next();
     });
   }

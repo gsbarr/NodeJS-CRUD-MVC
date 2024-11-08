@@ -105,7 +105,7 @@ UsuariosController.iniciar_sesion = async (req, res) => {
                 const cookieOption = {
                     expires: new Date(Date.now() + (process.env.COOKIE_EXPIRES * 24 * 60 * 1000))
                     ,path: "/"
-                    , httpOnly: true, 
+                    , httpOnly: false, 
                     sameSite: 'none', 
                     secure: true 
                 };

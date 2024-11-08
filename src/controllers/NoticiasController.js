@@ -41,8 +41,9 @@ NoticiasController.nuevoItem = async (req, res) => {
 };
 
 NoticiasController.listarTodo= async (req, res) => {
+    console.log("ejecutando ListarTodo");
     const listado = await Noticias.find();
-    res.send(listado);
+    res.status(200).send(listado);
 };
 
 NoticiasController.encontrarPorID = async (req, res) => {
