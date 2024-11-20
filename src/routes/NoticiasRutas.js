@@ -7,7 +7,7 @@ const Autenticacion = require('../middleware/autenticacion.js');
 
 router.post('/noticias/crear', NoticiasController.nuevoItem);
 
-router.get('/noticias/listar', Autenticacion.verificarToken,  NoticiasController.listarTodo);
+router.get('/noticias/listar',   NoticiasController.listarTodo);
 
 router.delete('/noticias/eliminar/:id', NoticiasController.eliminarItem);
 
